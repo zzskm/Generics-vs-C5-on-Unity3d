@@ -1,4 +1,4 @@
-A set of simple tests to compare the relative performance of HashSet<T>, List<T> and Dictionary<TKey, TValue>.
+A set of simple tests to compare the relative performance of Generics vs C5.
 
 The tests cover the simple Add, Remove, and contains test for both value and reference types.
 
