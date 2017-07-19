@@ -111,35 +111,28 @@ public class Program : MonoBehaviour
             inputs, () => new Dictionary<T, T>(), (dict, i) => dict[i] = i, NumberOfTestRuns);
 
         var c5hashsetResult = PerfTest.DoTest(
-            inputs, () => new C5.HashSet<T>(C5.MemoryType.Normal), (hs, i) => hs.Add(i), NumberOfTestRuns);
+            inputs, () => new C5.HashSet<T>(), (hs, i) => hs.Add(i), NumberOfTestRuns);
 
         var c5listResult = PerfTest.DoTest(
-            inputs, () => new C5.ArrayList<T>(C5.MemoryType.Normal), (l, i) => l.Add(i), NumberOfTestRuns);
+            inputs, () => new C5.ArrayList<T>(), (l, i) => l.Add(i), NumberOfTestRuns);
 
         var c5dictResult = PerfTest.DoTest(
-            inputs, () => new C5.HashDictionary<T, T>(C5.MemoryType.Normal), (dict, i) => dict.Add(i, i), NumberOfTestRuns);
+            inputs, () => new C5.HashDictionary<T, T>(), (dict, i) => dict.Add(i, i), NumberOfTestRuns);
 
         var c5dictResult2 = PerfTest.DoTest(
-            inputs, () => new C5.HashDictionary<T, T>(C5.MemoryType.Normal), (dict, i) => dict[i] = i, NumberOfTestRuns);
+            inputs, () => new C5.HashDictionary<T, T>(), (dict, i) => dict[i] = i, NumberOfTestRuns);
 
         UnityEngine.Debug.Log(string.Format(@"
 Test {0} ({1}) Result:
 ------------------------------------------------
-HashSet.Add              : {2}
-            
-List.Add                 : {3}
-            
-Dictionary.Add           : {4}
-            
-Dictionary[n] = n        : {5}
-
-C5.HashSet.Add              : {6}
-            
-C5.ArrayList.Add                 : {7}
-            
-C5.HashDictionary.Add           : {8}
-            
-C5.HashDictionary[n] = n        : {9}
+HashSet.Add : {2}
+List.Add : {3}
+Dictionary.Add : {4}
+Dictionary[n] = n : {5}
+C5.HashSet.Add : {6}
+C5.ArrayList.Add : {7}
+C5.HashDictionary.Add : {8}
+C5.HashDictionary[n] = n : {9}
 ------------------------------------------------",
             testNumber,
             description,
@@ -174,13 +167,13 @@ C5.HashDictionary[n] = n        : {9}
             targets, () => inputs.ToDictionary(i => i, i => i), (dict, t) => dict.ContainsValue(t), NumberOfTestRuns);
 
         var c5hashsetResult = PerfTest.DoTest(
-            targets, () => new C5.HashSet<T>(C5.MemoryType.Normal), (hs, li) => hs.AddAll(li), (hs, t) => hs.Contains(t), NumberOfTestRuns);
+            targets, () => new C5.HashSet<T>(), (hs, li) => hs.AddAll(li), (hs, t) => hs.Contains(t), NumberOfTestRuns);
 
         var c5listResult = PerfTest.DoTest(
-            targets, () => new C5.ArrayList<T>(C5.MemoryType.Normal), (l, li) => l.AddAll(li), (l, t) => l.Contains(t), NumberOfTestRuns);
+            targets, () => new C5.ArrayList<T>(), (l, li) => l.AddAll(li), (l, t) => l.Contains(t), NumberOfTestRuns);
 
         var c5dictResult = PerfTest.DoTest(
-            targets, () => new C5.HashDictionary<T, T>(C5.MemoryType.Normal),
+            targets, () => new C5.HashDictionary<T, T>(),
             (dict, li) =>
             {
                 List<C5.KeyValuePair<T, T>> lk = new List<C5.KeyValuePair<T, T>>();
@@ -193,21 +186,14 @@ C5.HashDictionary[n] = n        : {9}
         UnityEngine.Debug.Log(string.Format(@"
 Test {0} ({1}) Result:
 ------------------------------------------------
-HashSet.Contains            : {2}
-            
-List.Contains               : {3}
-            
-Dictionary.ContainsKey      : {4}
-            
-Dictionary.ContainsValue    : {5}
-
-C5.HashSet.Contains            : {6}
-            
-C5.ArrayList.Contains               : {7}
-            
-C5.HashDictionary.ContainsKey      : {8}
-            
-C5.HashDictionary.ContainsValue    : x
+HashSet.Contains : {2}
+List.Contains : {3}
+Dictionary.ContainsKey : {4}
+Dictionary.ContainsValue : {5}
+C5.HashSet.Contains : {6}
+C5.ArrayList.Contains : {7}
+C5.HashDictionary.ContainsKey : {8}
+C5.HashDictionary.ContainsValue : x
 ------------------------------------------------",
             testNumber,
             description,
@@ -235,13 +221,13 @@ C5.HashDictionary.ContainsValue    : x
             targets, () => inputs.ToDictionary(i => i, i => i), (dict, t) => dict.Remove(t), NumberOfTestRuns);
 
         var c5hashsetResult = PerfTest.DoTest(
-            targets, () => new C5.HashSet<T>(C5.MemoryType.Normal), (hs, li) => hs.AddAll(li), (hs, t) => hs.Remove(t), NumberOfTestRuns);
+            targets, () => new C5.HashSet<T>(), (hs, li) => hs.AddAll(li), (hs, t) => hs.Remove(t), NumberOfTestRuns);
 
         var c5listResult = PerfTest.DoTest(
-            targets, () => new C5.ArrayList<T>(C5.MemoryType.Normal), (l, li) => l.AddAll(li), (l, t) => l.Remove(t), NumberOfTestRuns);
+            targets, () => new C5.ArrayList<T>(), (l, li) => l.AddAll(li), (l, t) => l.Remove(t), NumberOfTestRuns);
 
         var c5dictResult = PerfTest.DoTest(
-            targets, () => new C5.HashDictionary<T, T>(C5.MemoryType.Normal),
+            targets, () => new C5.HashDictionary<T, T>(),
             (dict, li) =>
             {
                 List<C5.KeyValuePair<T, T>> lk = new List<C5.KeyValuePair<T, T>>();
@@ -253,17 +239,12 @@ C5.HashDictionary.ContainsValue    : x
         UnityEngine.Debug.Log(string.Format(@"
 Test {0} ({1}) Result:
 ------------------------------------------------
-HashSet.Remove      : {2}
-            
-List.Remove         : {3}
-            
-Dictionary.Remove   : {4}
-
-C5.HashSet.Remove      : {5}
-            
-C5.ArrayList.Remove         : {6}
-            
-C5.HashDictionary.Remove   : {7}
+HashSet.Remove : {2}
+List.Remove : {3}
+Dictionary.Remove : {4}
+C5.HashSet.Remove : {5}
+C5.ArrayList.Remove : {6}
+C5.HashDictionary.Remove : {7}
 ------------------------------------------------",
             testNumber,
             description,
